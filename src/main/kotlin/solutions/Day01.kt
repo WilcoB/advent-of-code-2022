@@ -1,8 +1,8 @@
 package solutions
 
-import java.io.File
+import getFile
 
-class DayOne {
+class Day01 {
     fun execute() {
         executePartOne()
         executePartTwo()
@@ -22,11 +22,14 @@ class DayOne {
     }
 
     private fun getCaloriesPerElf(): List<Int> {
-        val input = File("src/main/resources/raw/input-day-one.txt").readText()
-        return input.split("\n\n").map {
-            it.split("\n").fold(0) { acc, calories ->
-                acc + calories.toInt()
+        return getFile("input-day-one")
+            .readText()
+            .split("\n\n")
+            .map {
+                it.split("\n")
+                    .fold(0) { acc, calories ->
+                        acc + calories.toInt()
+                    }
             }
-        }
     }
 }
