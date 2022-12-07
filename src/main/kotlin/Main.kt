@@ -1,5 +1,5 @@
-import solutions.Day01
+import solutions.*
 
 fun main(args: Array<String>) {
-    Day01().execute()
+    Day02().execute()
 }

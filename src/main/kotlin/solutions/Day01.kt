@@ -22,7 +22,7 @@ class Day01 {
     }
 
     private fun getCaloriesPerElf(): List<Int> {
-        return getFile("input-day-one")
+        return getFile("input-day01")
             .readText()
             .split("\n\n")
             .map {
