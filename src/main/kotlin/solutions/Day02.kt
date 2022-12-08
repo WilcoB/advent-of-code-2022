@@ -53,6 +53,7 @@ class Day02 {
 
         println("The total score of part two is: $score")
     }
+    
     private fun calculateScore(own: String?, opponent: String): Int {
         return when (own) {
             OWN_ROCK -> 1 + when (opponent) {
