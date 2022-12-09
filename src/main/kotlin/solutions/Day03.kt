@@ -24,19 +24,15 @@ class Day03 {
     }
 
     private fun executePartTwo() {
-        val rucksacks = getFile("input-day03").readLines()
-        val groups = mutableListOf<List<String>>()
-
-        for (i in rucksacks.indices step 3) {
-            groups.add(listOf(rucksacks[i], rucksacks[i + 1], rucksacks[i + 2]))
-        }
-
-        val prioritySum = groups.sumOf {
-            val badgeItem = it[0].first { item ->
-                it[1].contains(item) && it[2].contains(item)
+        val prioritySum = getFile("input-day03")
+            .readLines()
+            .chunked(3)
+            .sumOf {
+                val badgeItem = it[0].first { item ->
+                    it[1].contains(item) && it[2].contains(item)
+                }
+                getItemPriority(badgeItem)
             }
-            getItemPriority(badgeItem)
-        }
 
         println("The sum of the priorities of the item types is: $prioritySum (part 2)")
     }
