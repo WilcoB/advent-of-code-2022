@@ -28,7 +28,9 @@ class Day05 {
             .executeProcedures(input = inputParts[1], retainOrder = retainOrder)
 
         return rows.toSortedMap()
-            .map { it.value.pop() }
+            .map {
+                it.value.pop()
+            }
             .reduce { acc, crate ->
                 acc + crate
             }
