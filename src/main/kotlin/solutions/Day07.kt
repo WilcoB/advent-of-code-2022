@@ -20,9 +20,9 @@ class Day07 {
     }
 
     private fun executePartTwo() {
-        val folders = getDirectories()
-        val size = folders.values.filter {
-            it.size() >= (30000000 - (70000000 - folders["/"]!!.size()))
+        val directories = getDirectories()
+        val size = directories.values.filter {
+            it.size() >= (30000000 - (70000000 - directories["/"]!!.size()))
         }.minByOrNull {
             it.size()
         }!!.size()
@@ -46,11 +46,7 @@ class Day07 {
                     when (command) {
                         "cd" -> {
                             when (parameter) {
-                                "/" -> {
-                                    navigationStack.removeAllElements()
-                                    navigationStack.add(directories.getOrPut("/") { Directory(name = "/") })
-                                }
-
+                                "/" -> navigationStack.add(directories.getOrPut("/") { Directory(name = "/") })
                                 ".." -> navigationStack.pop()
                                 else -> {
                                     parameter?.let {
@@ -84,17 +80,13 @@ class Day07 {
         return directories
     }
 
-    interface SystemItem {
-        val name: String
-    }
-
-    data class File(override val name: String, val size: Long) : SystemItem
+    data class File(val name: String, val size: Long)
 
     data class Directory(
-        override val name: String,
+        val name: String,
         val directories: MutableList<Directory> = mutableListOf(),
         val files: MutableList<File> = mutableListOf()
-    ) : SystemItem {
+    ) {
         fun size(): Long = directories.sumOf { it.size() } + files.sumOf { it.size }
     }
 }
