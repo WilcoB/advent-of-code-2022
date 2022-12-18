@@ -9,39 +9,31 @@ class Day08 {
     }
 
     private fun executePartOne() {
-        val grid = getFile("input-day08")
-            .readLines()
-            .map { it.toCharArray() }
-
+        val grid = buildGrid()
         val visibleTrees = grid.sumOf { row ->
-            val y = grid.indexOf(row)
-            var x = -1
-
-            row.count {
-                x++
-                grid.isTreeVisible(x, y)
-            }
+            row.filterIndexed { x, _ ->
+                grid.isTreeVisible(x, grid.indexOf(row))
+            }.count()
         }
 
         println("$visibleTrees trees are visible from outside the grid")
     }
 
     private fun executePartTwo() {
-        val grid = getFile("input-day08")
-            .readLines()
-            .map { it.toCharArray() }
-
-        val highestScore = grid.maxOf { horizontalTrees ->
-            val y = grid.indexOf(horizontalTrees)
-            var x = -1
-
-            horizontalTrees.maxOf {
-                x++
-                grid.getTreeScenicScore(x, y)
-            }
+        val grid = buildGrid()
+        val highestScore = grid.maxOf { row ->
+            row.mapIndexed { x, _ ->
+                grid.getTreeScenicScore(x, grid.indexOf(row))
+            }.max()
         }
 
         println("$highestScore is the highest scenic score possible")
+    }
+
+    private fun buildGrid(): List<CharArray> {
+        return getFile("input-day08")
+            .readLines()
+            .map { it.toCharArray() }
     }
 
     private fun List<CharArray>.isTreeVisible(x: Int, y: Int): Boolean {
