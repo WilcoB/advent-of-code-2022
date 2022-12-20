@@ -14,7 +14,7 @@ class Day09 {
     }
 
     private fun executePartTwo() {
-        println("At ${getTailVisits(ropeSize = 10)} positions the tail of the rope visits at least once (part 1)")
+        println("At ${getTailVisits(ropeSize = 10)} positions the tail of the rope visits at least once (part 2)")
     }
 
     private fun getTailVisits(ropeSize: Int): Int {
